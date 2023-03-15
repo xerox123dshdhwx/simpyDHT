@@ -1,3 +1,10 @@
 import simpy
+from classes.node import Node
+import random as rd
+from classes.dht import Dht
 
-print("insert what you want")
+
+dht = Dht()
+env = dht.env
+env.run()
+
