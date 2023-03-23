@@ -42,6 +42,9 @@ class Dht:
         new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=n2)
         array.append(new_node)
 
+        new_node = Node(env=self.env, id_simpy=4, id_node=3, entree_dht=n2)
+        array.append(new_node)
+
 
         return array
 

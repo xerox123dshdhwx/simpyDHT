@@ -18,7 +18,7 @@ class Node:
         yield self.env.timeout(rd.randint(3, 20))
         if (self.connected):
             print("CONNECTION : ", self)
-        print("TIME : ", self.env.now)
+        #print("TIME : ", self.env.now)
         while True:
             if (self.connected):
                 yield self.env.timeout(rd.randint(1, 5))
@@ -60,7 +60,12 @@ class Node:
         else:
             #print("on l'envoie a droite")
             #print("ICIIIIIII", entree_dht.id_node)
-            target.send_message("Connected", entree_dht.right_neighbour)
+            if target.id_node > entree_dht.right_neighbour.id_node :
+                target.send_message("Connected", entree_dht.right_neighbour)
+                print('INFO SYSTEME : envoi à droite')
+            else : 
+                target.send_message("Connected", entree_dht.left_neighbour)
+                print('INFO SYSTEME : envoi à gauche')
 
     def insert(self, entree_dht, a_connecter=None):
         if a_connecter == None:

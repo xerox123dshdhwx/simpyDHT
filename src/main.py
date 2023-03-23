@@ -8,5 +8,5 @@ env.run(until=50)
 print("\nFin de simulation\n")
 
 for i in dht.array_node:
-    print(i.id_node)
+    print(i)
 
