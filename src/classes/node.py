@@ -23,16 +23,16 @@ class Node:
             if (self.connected):
                 yield self.env.timeout(rd.randint(1, 5))
                 if (len(self.queue) != 0):
-                    print(self.queue)
+                    #print(self.queue)
                     if (self.queue[0][0] == "Connected"):
-                        print("nouveau noeud ou regarder", self.queue[0][1].id_node)
-                        print("moi", self.id_node)
+                        #print("nouveau noeud ou regarder", self.queue[0][1].id_node)
+                        #print("moi", self.id_node)
                         self.insert(self, a_connecter=self.queue[0][1])
                     self.queue.pop(0)
-                    print(self.queue)
+                    #print(self.queue)
             else:
                 yield self.env.timeout(rd.randint(20, 25))
-                print("rentre dans insert")
+                #print("rentre dans insert")
                 self.insert(self.entree_dht)
 
     def __str__(self):
@@ -49,9 +49,17 @@ class Node:
             entree_dht.right_neighbour = target
             target.connected = True
             print("CONNECTION : ", target)
+        elif target.id_node < entree_dht.id_node and target.id_node > entree_dht.left_neighbour.id_node :
+            #print('par la gauche')
+            target.left_neighbour = entree_dht.left_neighbour
+            target.right_neighbour = entree_dht
+            entree_dht.left_neighbour.right_neighbour = target
+            entree_dht.left_neighbour = target
+            target.connected = True
+            print("CONNECTION : ", target)
         else:
-            print("on l'envoie a droite")
-            print("ICIIIIIII", entree_dht.id_node)
+            #print("on l'envoie a droite")
+            #print("ICIIIIIII", entree_dht.id_node)
             target.send_message("Connected", entree_dht.right_neighbour)
 
     def insert(self, entree_dht, a_connecter=None):
@@ -62,4 +70,4 @@ class Node:
 
     def send_message(self, message, right_neighbour):
         right_neighbour.queue.append([message, self])
-        print(f"message envoyé à :{right_neighbour.id_node}")
+        #print(f"message envoyé à :{right_neighbour.id_node}")
