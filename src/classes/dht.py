@@ -33,9 +33,12 @@ class Dht:
         for o in array :
             o.connected = True
 
-        new_node = Node(env=self.env,id_simpy=3,id_node = rd.randint(2, 13), entree_dht=n1)
+        new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=n1)
+        array.append(new_node)
 
-        #self.insert_node(n0, n1, n2)
+        new_node = Node(env=self.env,id_simpy=3,id_node = 18, entree_dht=n1)
+        array.append(new_node)
+
 
         return array
 
@@ -46,10 +49,7 @@ class Dht:
             new_node.left_neighbour = n1
             n1.right_neighbour.left_neighbour = new_node
             n1.right_neighbour = new_node
-        # print(n1)
-        # print(new_node)
-        # print(n2)
-        # print(n0)
+
 
 
 
