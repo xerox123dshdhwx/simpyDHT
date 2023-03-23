@@ -1,6 +1,6 @@
 import simpy
 import random as rd
-from src.classes.node import Node
+from classes.node import Node
 
 
 class Dht:
@@ -18,14 +18,14 @@ class Dht:
         n1 = Node(self.env, 1, 2)
         n2 = Node(self.env, 2, 13)
 
-        n0.right_neighbour = n2
-        n0.left_neighbour = n1
+        n0.right_neighbour = n1
+        n0.left_neighbour = n2
 
         n1.right_neighbour = n2
         n1.left_neighbour = n0
 
-        n2.right_neighbour = n1
-        n2.left_neighbour = n0
+        n2.right_neighbour = n0
+        n2.left_neighbour = n1
         array.append(n0)
         array.append(n1)
         array.append(n2)

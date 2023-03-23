@@ -1,4 +1,4 @@
-from src.classes.dht import Dht
+from classes.dht import Dht
 
 
 dht = Dht()
