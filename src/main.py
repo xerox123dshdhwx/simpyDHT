@@ -3,5 +3,7 @@ from classes.dht import Dht
 
 dht = Dht()
 env = dht.env
-env.run()
+print("\nDébut de simulation\n")
+env.run(until=50)
+print("\nFin de simulation\n")
 
