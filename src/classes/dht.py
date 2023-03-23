@@ -39,11 +39,19 @@ class Dht:
         # new_node = Node(env=self.env,id_simpy=4,id_node = 18, entree_dht=n1)
         # array.append(new_node)
 
-        new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=n2)
+        #new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=n2)
+        #array.append(new_node)
+
+        #new_node = Node(env=self.env, id_simpy=4, id_node=3, entree_dht=n2)
+        #array.append(new_node)
+
+        new_node = Node(env=self.env, id_simpy=5, id_node=28, entree_dht=n0)
         array.append(new_node)
 
-        new_node = Node(env=self.env, id_simpy=4, id_node=3, entree_dht=n2)
-        array.append(new_node)
+        #new_node = Node(env=self.env, id_simpy=6, id_node=1, entree_dht=n2)
+        #array.append(new_node)
+
+
 
 
         return array

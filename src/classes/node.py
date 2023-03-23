@@ -36,7 +36,7 @@ class Node:
                 self.insert(self.entree_dht)
 
     def __str__(self):
-        return f'Je suis le noeud simpy {self.id_simpy} , mon nom est {self.id_node} !      ({self.left_neighbour.id_node} <--> {self.right_neighbour.id_node})'
+        return f'Je suis le noeud simpy {self.id_simpy} , mon nom est {self.id_node} !      ({self.left_neighbour.id_node} <- {self.id_node} -> {self.right_neighbour.id_node})'
 
     def generator(self, duration):
         yield self.env.timeout(duration)
@@ -49,8 +49,23 @@ class Node:
             entree_dht.right_neighbour = target
             target.connected = True
             print("CONNECTION : ", target)
+        elif target.id_node > entree_dht.id_node and target.id_node > entree_dht.right_neighbour.id_node :#todo erreur condition erreur logique
+            target.right_neighbour = entree_dht.right_neighbour
+            target.left_neighbour = entree_dht
+            entree_dht.right_neighbour.left_neighbour = target
+            entree_dht.right_neighbour = target
+            target.connected = True
+            print("CONNECTION : ", target)
+
         elif target.id_node < entree_dht.id_node and target.id_node > entree_dht.left_neighbour.id_node :
             #print('par la gauche')
+            target.left_neighbour = entree_dht.left_neighbour
+            target.right_neighbour = entree_dht
+            entree_dht.left_neighbour.right_neighbour = target
+            entree_dht.left_neighbour = target
+            target.connected = True
+            print("CONNECTION : ", target)
+        elif target.id_node < entree_dht.id_node and target.id_node < entree_dht.left_neighbour.id_node :#todo erreur condition erreur logique
             target.left_neighbour = entree_dht.left_neighbour
             target.right_neighbour = entree_dht
             entree_dht.left_neighbour.right_neighbour = target
