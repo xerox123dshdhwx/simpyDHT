@@ -1,10 +1,12 @@
-import simpy
-from classes.node import Node
-import random as rd
 from classes.dht import Dht
 
 
 dht = Dht()
 env = dht.env
-env.run()
+print("\nDébut de simulation\n")
+env.run(until=50)
+print("\nFin de simulation\n")
+
+for i in dht.array_node:
+    print(i.id_node)
 
