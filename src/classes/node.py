@@ -18,7 +18,7 @@ class Node:
     def run(self):
         yield from self.generator(rd.randint(3, 5))
         if self.connected:
-            print("CONNECTION : ", self, ' [TEMPS : ', self.env.now, ']')
+            print(str(self.env.now), " - CONNECTION : ", self)
         while True:
             if self.connected:
                 yield from self.generator(rd.randint(1, 5))
@@ -58,7 +58,7 @@ class Node:
             entree_dht.right_neighbour.left_neighbour = target
             entree_dht.right_neighbour = target
             target.connected = True
-            print("CONNECTION : ", target, ' [TEMPS : ', self.env.now, ']')
+            print(str(self.env.now), " - CONNECTION : ", target)
 
         elif target.id_node < entree_dht.id_node and target.id_node > entree_dht.left_neighbour.id_node \
                 or target.id_node < entree_dht.id_node and entree_dht.left_neighbour.id_node > entree_dht.id_node:
@@ -68,20 +68,22 @@ class Node:
             entree_dht.left_neighbour.right_neighbour = target
             entree_dht.left_neighbour = target
             target.connected = True
-            print("CONNECTION : ", target, ' [TEMPS : ', self.env.now, ']')
+            print(str(self.env.now), " - CONNECTION : ", target)
 
         elif not target.connected:
             if target.id_node > entree_dht.right_neighbour.id_node:
                 target.send_message("Insertion", entree_dht.right_neighbour)
-                print('INFO SYSTEM : ' + str(self.id_node) + ' envoi ' + str(target.id_node) + ' à droite vers ' + str(
-                    entree_dht.right_neighbour.id_node) + ' [TEMPS : ' + str(self.env.now) + ']')
+                print(str(self.env.now), ' - INFO SYSTEM : ', str(self.id_node), ' envoi ', str(target.id_node), ' à droite vers ', str(
+                    entree_dht.right_neighbour.id_node))
             else:
                 target.send_message("Insertion", entree_dht.left_neighbour)
-                print('INFO SYSTEM : ' + str(self.id_node) + ' envoi ' + str(target.id_node) + ' à gauche vers ' + str(
-                    entree_dht.left_neighbour.id_node) + ' [TEMPS : ' + str(self.env.now) + ']')
+                print(str(self.env.now), ' - INFO SYSTEM : ', str(self.id_node), ' envoi ', str(target.id_node), ' à gauche vers ', str(
+                    entree_dht.left_neighbour.id_node))
 
     def insert(self, entree_dht, a_connecter=None):
-        if a_connecter is None:
+        if a_connecter == None:
+            if not self.connected :
+                print(str(self.env.now) + ' - INFO SYSTEME : ', str(self.id_node), 'cherche à se connecter via ', str(entree_dht.id_node))
             self.verify(self, entree_dht)
         else:
             self.verify(a_connecter, entree_dht)
