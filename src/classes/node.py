@@ -49,7 +49,7 @@ class Node:
             entree_dht.right_neighbour = target
             target.connected = True
             print("CONNECTION : ", target)
-        elif target.id_node > entree_dht.id_node and target.id_node > entree_dht.right_neighbour.id_node :#todo erreur condition erreur logique
+        elif target.id_node > entree_dht.id_node and entree_dht.right_neighbour.id_node < entree_dht.id_node :#todo erreur condition erreur logique
             target.right_neighbour = entree_dht.right_neighbour
             target.left_neighbour = entree_dht
             entree_dht.right_neighbour.left_neighbour = target
@@ -65,7 +65,7 @@ class Node:
             entree_dht.left_neighbour = target
             target.connected = True
             print("CONNECTION : ", target)
-        elif target.id_node < entree_dht.id_node and target.id_node < entree_dht.left_neighbour.id_node :#todo erreur condition erreur logique
+        elif target.id_node < entree_dht.id_node and entree_dht.left_neighbour.id_node > entree_dht.id_node :#todo erreur condition erreur logique
             target.left_neighbour = entree_dht.left_neighbour
             target.right_neighbour = entree_dht
             entree_dht.left_neighbour.right_neighbour = target
