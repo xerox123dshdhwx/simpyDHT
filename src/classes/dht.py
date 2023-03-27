@@ -1,6 +1,6 @@
 import simpy
 import random as rd
-from classes.node import Node
+from src.classes.node import Node
 
 
 class Dht:
@@ -8,9 +8,6 @@ class Dht:
     def __init__(self):
         self.env = simpy.Environment()
         self.array_node = self.create_ring()
-
-    def connect(self):
-        pass
 
     def create_ring(self):
         array = []
@@ -30,17 +27,17 @@ class Dht:
         array.append(n1)
         array.append(n2)
 
-        for o in array :
+        for o in array:
             o.connected = True
 
         new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=n1)
         array.append(new_node)
 
-        new_node = Node(env=self.env,id_simpy=4,id_node = 18, entree_dht=n1)
+        new_node = Node(env=self.env, id_simpy=4, id_node=18, entree_dht=n1)
         array.append(new_node)
 
-        # new_node = Node(env=self.env, id_simpy=5, id_node=6, entree_dht=n2)
-        # array.append(new_node)
+        new_node = Node(env=self.env, id_simpy=5, id_node=29, entree_dht=n2)
+        array.append(new_node)
 
         new_node = Node(env=self.env, id_simpy=6, id_node=3, entree_dht=n2)
         array.append(new_node)
@@ -51,19 +48,12 @@ class Dht:
         new_node = Node(env=self.env, id_simpy=8, id_node=1, entree_dht=n2)
         array.append(new_node)
 
-
-
-
         return array
 
-    def insert_node(self, n0, n1, n2):
-        new_node = Node(env=self.env,id_simpy=3,id_node = rd.randint(2, 13))
-        if new_node.id_node > n1.id_node and new_node.id_node < n1.right_neighbour.id_node :
+    def insert_node(self, n1):
+        new_node = Node(env=self.env, id_simpy=3, id_node=rd.randint(2, 13))
+        if new_node.id_node > n1.id_node and new_node.id_node < n1.right_neighbour.id_node:
             new_node.right_neighbour = n1.right_neighbour
             new_node.left_neighbour = n1
             n1.right_neighbour.left_neighbour = new_node
             n1.right_neighbour = new_node
-
-
-
-
