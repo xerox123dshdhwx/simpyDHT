@@ -32,23 +32,23 @@ class Dht:
 
         for o in array :
             o.connected = True
-
-        new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=n1)
+        
+        new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=self.get_random_connected_node(array))
         array.append(new_node)
 
-        new_node = Node(env=self.env,id_simpy=4,id_node = 18, entree_dht=n1)
+        new_node = Node(env=self.env,id_simpy=4,id_node = 18, entree_dht=self.get_random_connected_node(array))
         array.append(new_node)
 
-        # new_node = Node(env=self.env, id_simpy=5, id_node=6, entree_dht=n2)
+        # new_node = Node(env=self.env, id_simpy=5, id_node=6, entree_dht=self.get_random_connected_node(array))
         # array.append(new_node)
 
-        new_node = Node(env=self.env, id_simpy=6, id_node=3, entree_dht=n2)
+        new_node = Node(env=self.env, id_simpy=6, id_node=3, entree_dht=self.get_random_connected_node(array))
         array.append(new_node)
 
-        new_node = Node(env=self.env, id_simpy=7, id_node=28, entree_dht=n1)
+        new_node = Node(env=self.env, id_simpy=7, id_node=28, entree_dht=self.get_random_connected_node(array))
         array.append(new_node)
 
-        new_node = Node(env=self.env, id_simpy=8, id_node=1, entree_dht=n2)
+        new_node = Node(env=self.env, id_simpy=8, id_node=1, entree_dht=self.get_random_connected_node(array))
         array.append(new_node)
 
 
@@ -65,5 +65,8 @@ class Dht:
             n1.right_neighbour = new_node
 
 
-
+    def get_random_connected_node (self, node_list) :
+        list_range = len(node_list)
+        index = rd.randint(0, list_range - 1)
+        return node_list[index]
 
