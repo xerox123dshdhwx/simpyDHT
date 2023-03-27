@@ -17,7 +17,7 @@ class Node:
     def run(self):
         yield self.env.timeout(rd.randint(3, 20))
         if (self.connected):
-            print("CONNECTION : ", self)
+            print("CONNECTION : ", self, ' [TEMPS : ', self.env.now, ']')
         #print("TIME : ", self.env.now)
         while True:
             if (self.connected):
@@ -48,14 +48,14 @@ class Node:
             entree_dht.right_neighbour.left_neighbour = target
             entree_dht.right_neighbour = target
             target.connected = True
-            print("CONNECTION : ", target)
-        elif target.id_node > entree_dht.id_node and entree_dht.right_neighbour.id_node < entree_dht.id_node :#todo erreur condition erreur logique
+            print("CONNECTION : ", target,  ' [TEMPS : ',  self.env.now, ']')
+        elif target.id_node > entree_dht.id_node and entree_dht.right_neighbour.id_node < entree_dht.id_node :
             target.right_neighbour = entree_dht.right_neighbour
             target.left_neighbour = entree_dht
             entree_dht.right_neighbour.left_neighbour = target
             entree_dht.right_neighbour = target
             target.connected = True
-            print("CONNECTION : ", target)
+            print("CONNECTION : ", target, ' [TEMPS : ', self.env.now, ']')
 
         elif target.id_node < entree_dht.id_node and target.id_node > entree_dht.left_neighbour.id_node :
             #print('par la gauche')
@@ -64,23 +64,23 @@ class Node:
             entree_dht.left_neighbour.right_neighbour = target
             entree_dht.left_neighbour = target
             target.connected = True
-            print("CONNECTION : ", target)
-        elif target.id_node < entree_dht.id_node and entree_dht.left_neighbour.id_node > entree_dht.id_node :#todo erreur condition erreur logique
+            print("CONNECTION : ", target, ' [TEMPS : ', self.env.now,  ']')
+        elif target.id_node < entree_dht.id_node and entree_dht.left_neighbour.id_node > entree_dht.id_node :
             target.left_neighbour = entree_dht.left_neighbour
             target.right_neighbour = entree_dht
             entree_dht.left_neighbour.right_neighbour = target
             entree_dht.left_neighbour = target
             target.connected = True
-            print("CONNECTION : ", target)
+            print("CONNECTION : ", target, ' [TEMPS : ', self.env.now, ']')
         else:
             #print("on l'envoie a droite")
             #print("ICIIIIIII", entree_dht.id_node)
             if target.id_node > entree_dht.right_neighbour.id_node :
                 target.send_message("Connected", entree_dht.right_neighbour)
-                print('INFO SYSTEME : envoi à droite')
+                print('INFO SYSTEME : ' + str(self.id_node) + ' envoi ' + str(target.id_node) + ' à droite vers ' + str(entree_dht.right_neighbour.id_node) + ' [TEMPS : ' + str(self.env.now) + ']')
             else : 
                 target.send_message("Connected", entree_dht.left_neighbour)
-                print('INFO SYSTEME : envoi à gauche')
+                print('INFO SYSTEME : ' + str(self.id_node) + ' envoi ' + str(target.id_node) + ' à gauche vers ' + str(entree_dht.left_neighbour.id_node) + ' [TEMPS : ' + str(self.env.now) + ']')
 
     def insert(self, entree_dht, a_connecter=None):
         if a_connecter == None:
