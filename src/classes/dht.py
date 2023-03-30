@@ -1,4 +1,5 @@
 import simpy
+import random as rd
 from src.classes.node import Node
 
 
@@ -10,7 +11,7 @@ class Dht:
         self.start()
 
     def start(self):
- 
+
         n0 = Node(self.env, 0, 25)
         n1 = Node(self.env, 1, 2)
         n2 = Node(self.env, 2, 13)
@@ -27,8 +28,8 @@ class Dht:
         self.array_node.append(n1)
         self.array_node.append(n2)
 
-        for o in self.array_node:
-            o.connected = True
+        for node in self.array_node:
+            node.connected = True
 
         new_node = Node(env=self.env, id_simpy=3, id_node=6, entree_dht=n1)
         self.array_node.append(new_node)
@@ -49,3 +50,12 @@ class Dht:
         self.array_node.append(new_node)
 
         return self.array_node
+
+    def get_random_connected_node(self):
+        index = None
+        node = None
+        while node is None:
+            index = rd.randint(0, len(self.array_node) - 1)
+            if self.array_node[index].connected :
+                node = self.array_node[index]
+        return node
